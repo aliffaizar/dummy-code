@@ -1,0 +1,20 @@
+{
+  "name": "dummy-code",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "start": "turbo start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "devDependencies": {
+    "turbo": "^1.10.1"
+  }
+}
