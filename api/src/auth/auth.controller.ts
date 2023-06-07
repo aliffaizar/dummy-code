@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
 import { AuthGuard } from './auth.guard';
 import { RequestWithUser } from 'src/types';
+import { GoogleGuard } from './auth-google.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -57,5 +58,24 @@ export class AuthController {
   @UseGuards(AuthGuard)
   async me(@Req() req: RequestWithUser) {
     return req?.user;
+  }
+
+  @Get('google')
+  @UseGuards(GoogleGuard)
+  googleAuth() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('google/callback')
+  @UseGuards(GoogleGuard)
+  async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
+    // handles the Google OAuth2 callback
+    const { name, email, id } = req?.user;
+    const token = this.jwtService.sign({ name, email, id });
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    });
+    res.redirect(req.headers.host);
   }
 }

@@ -5,7 +5,7 @@ import { compare, hash } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 import { User } from 'src/user/entities/user.entity';
-import { LoginDto, RegisterDto } from './dto';
+import { GoogleDto, LoginDto, RegisterDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -38,6 +38,24 @@ export class AuthService {
       email,
       name,
     });
+    return user;
+  }
+
+  async findOrCreate(goolePayload: GoogleDto): Promise<User> {
+    const { email, name, password, verified } = goolePayload;
+    const userInDb = await this.userRepository.findOne({
+      where: { email },
+    });
+    if (userInDb) return userInDb;
+
+    const hashPassword = await this.hashPassword(password);
+    const user = await this.userRepository.save({
+      email,
+      name,
+      verified,
+      password: hashPassword,
+    });
+    user.password = undefined;
     return user;
   }
 }
