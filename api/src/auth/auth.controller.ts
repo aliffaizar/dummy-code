@@ -57,14 +57,16 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  async me(@Req() req: RequestWithUser, @Res() res: Response) {
+  async me(
+    @Req() req: RequestWithUser,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { email } = req?.user;
     const user = await this.authService.findOne(email);
     if (!user) {
       res.clearCookie('access_token');
       throw new UnauthorizedException(`user doesn't exist`);
     }
-
     return user;
   }
 
