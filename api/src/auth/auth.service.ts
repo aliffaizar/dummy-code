@@ -6,7 +6,6 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { compare, hash } from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
 
 import { User } from 'src/user/entities/user.entity';
 import { GoogleDto, LoginDto, RegisterDto } from './dto';
@@ -15,7 +14,6 @@ import { GoogleDto, LoginDto, RegisterDto } from './dto';
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private readonly jwtService: JwtService,
   ) {}
 
   private async hashPassword(password: string): Promise<string> {
@@ -64,6 +62,13 @@ export class AuthService {
       verified,
       password: hashPassword,
     });
+    user.password = undefined;
+    return user;
+  }
+
+  async findOne(email: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) return null;
     user.password = undefined;
     return user;
   }

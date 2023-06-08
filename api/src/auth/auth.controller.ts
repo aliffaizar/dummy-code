@@ -5,6 +5,7 @@ import {
   Post,
   Req,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -48,7 +49,7 @@ export class AuthController {
     return user;
   }
 
-  @Post('logout')
+  @Get('logout')
   async logout(@Res({ passthrough: true }) response: Response) {
     response.clearCookie('access_token');
     return { message: 'success' };
@@ -56,8 +57,15 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  async me(@Req() req: RequestWithUser) {
-    return req?.user;
+  async me(@Req() req: RequestWithUser, @Res() res: Response) {
+    const { email } = req?.user;
+    const user = await this.authService.findOne(email);
+    if (!user) {
+      res.clearCookie('access_token');
+      throw new UnauthorizedException(`user doesn't exist`);
+    }
+
+    return user;
   }
 
   @Get('google')
