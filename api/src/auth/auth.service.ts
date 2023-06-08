@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { compare, hash } from 'bcrypt';
@@ -32,13 +36,18 @@ export class AuthService {
 
   async register(registerDto: RegisterDto): Promise<User> {
     const { email, password, name } = registerDto;
-    const hashPassword = await this.hashPassword(password);
-    const user = await this.userRepository.save({
-      password: hashPassword,
-      email,
-      name,
-    });
-    return user;
+    try {
+      const hashPassword = await this.hashPassword(password);
+      const user = await this.userRepository.save({
+        password: hashPassword,
+        email,
+        name,
+      });
+      return user;
+    } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY')
+        throw new ConflictException('email already exists');
+    }
   }
 
   async findOrCreate(goolePayload: GoogleDto): Promise<User> {
