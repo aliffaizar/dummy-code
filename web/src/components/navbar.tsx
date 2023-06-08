@@ -1,11 +1,14 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import { RootState } from '../store/rootReducer'
 import { usePath } from '../hooks/usePath'
+import { Avatar } from './Avatar'
 
 export function Navbar() {
   const auth = useSelector((state: RootState) => state.auth)
   const path = usePath()
+
   return (
     <nav className='bg-neutral shadow-md'>
       <div className='navbar max-w-7xl mx-auto'>
@@ -26,6 +29,7 @@ export function Navbar() {
               register
             </Link>
           )}
+          {auth.authenicated && <Avatar />}
         </div>
       </div>
     </nav>

@@ -8,7 +8,7 @@ import { authenicate } from '../store/authReducer'
 
 export function MainLayout() {
   const dispatch = useDispatch()
-  const [isLoding, setIsLoading] = useState(false)
+  const [isLoding, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -19,7 +19,7 @@ export function MainLayout() {
         })
         const user = {
           id: data.id,
-          username: data.username,
+          name: data.name,
           email: data.email,
         }
         if (data) {
@@ -35,15 +35,16 @@ export function MainLayout() {
 
   return (
     <>
-      <Navbar />
-      <div>
-        {isLoding && (
-          <div className='h-[80vh] flex justify-center items-center'>
-            Loading...
-          </div>
-        )}
-        <Outlet />
-      </div>
+      {isLoding ? (
+        <div className='h-screen flex justify-center items-center'>
+          <span className='loading loading-dots w-16'></span>
+        </div>
+      ) : (
+        <>
+          <Navbar />
+          <Outlet />
+        </>
+      )}
     </>
   )
 }

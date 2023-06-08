@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { useState } from 'react'
+import { FcGoogle } from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
@@ -117,6 +118,31 @@ export default function Register() {
             )}
           </div>
         </form>
+        <div className='mt-6'>
+          <div className='relative'>
+            <div className='absolute inset-0 flex items-center'>
+              <div className='w-full border-t border-gray-300' />
+            </div>
+            <div className='relative flex justify-center text-sm'>
+              <span className='bg-base-100 px-2 text-zinc-300'>
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          <div className='mt-6 flex flex-wrap justify-center gap-3'>
+            <div className='w-full'>
+              <a
+                href='http://localhost:3000/api/auth/google'
+                target='_bank'
+                className='inline-flex w-full justify-center rounded-md border items-center border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50'
+              >
+                <FcGoogle className='w-6 h-6' />
+                <span className='ml-2 text-base'>Google</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
