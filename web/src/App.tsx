@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
 import Challenge from './pages/challenge'
+import NotFound from './pages/notFound'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/challenges/:id' element={<Challenge />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
   )
