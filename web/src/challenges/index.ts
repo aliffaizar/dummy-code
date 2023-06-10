@@ -8,7 +8,11 @@ export interface Challenge {
   starterCode: string
   testCases: string[]
   expectedResults: any[]
-  validator: (fn: any, testCases: string[], expectedResults: any[]) => any[]
+  validator: (
+    fn: any,
+    testCases: string[],
+    expectedResults: any[]
+  ) => { res: boolean[]; output: boolean[] }
 }
 
 export default [

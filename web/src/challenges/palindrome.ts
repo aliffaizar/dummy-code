@@ -7,16 +7,22 @@ const testCases = ['racecar', 'cat', 'mom']
 
 const expectedResults = [true, false, true]
 
-function validator(fn: any, testCases: string[], expectedResults: boolean[]) {
+function validator(
+  fn: any,
+  testCases: string[],
+  expectedResults: boolean[]
+): { res: boolean[]; output: boolean[] } {
   try {
     const res: boolean[] = []
+    const output: boolean[] = []
     for (let i = 0; i < testCases.length; i++) {
       const result = fn(testCases[i])
+      output.push(result)
       res.push(result === expectedResults[i])
     }
-    return res
-  } catch (error: any) {
-    return [error.message]
+    return { res, output }
+  } catch (error) {
+    return { res: [], output: [] }
   }
 }
 

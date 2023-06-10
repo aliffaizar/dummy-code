@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
+import { ToastContainer } from 'react-toastify'
 
 import { Navbar } from '../components/navbar'
 import { useEffect, useState } from 'react'
@@ -45,6 +46,7 @@ export function MainLayout() {
           <Outlet />
         </>
       )}
+      <ToastContainer />
     </>
   )
 }

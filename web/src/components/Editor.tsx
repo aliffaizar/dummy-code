@@ -1,22 +1,34 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { githubDark } from '@uiw/codemirror-theme-github'
 import { javascript } from '@codemirror/lang-javascript'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import Split from 'react-split'
+import { toast } from 'react-toastify'
+import { Tab } from '@headlessui/react'
 
 import { Challenge } from '../challenges'
+import { cn } from '../lib/utils'
 
 export function Editor({ challenge }: { challenge: Challenge }) {
   const [code, setCode] = useState(challenge.starterCode)
+  const [result, setResult] = useState<boolean[]>([])
   const [output, setOutput] = useState<boolean[]>([])
 
   const handleTest = () => {
-    const res = challenge.validator(
-      eval(`(${code})`),
+    const { res, output } = challenge.validator(
+      eval(`(${code.replace(/;/g, '')})`),
       challenge.testCases,
       challenge.expectedResults
     )
-    setOutput(res as boolean[])
+
+    setResult(res)
+    setOutput(output)
+
+    if (res.includes(false)) {
+      toast.error('Test failed')
+      return
+    }
+    toast.success('Test passed')
   }
 
   return (
@@ -40,7 +52,46 @@ export function Editor({ challenge }: { challenge: Challenge }) {
           </div>
 
           <div className='h-full relative overflow-auto'>
-            <div className='h-full'></div>
+            <div className='h-full px-6 py-2'>
+              <Tab.Group>
+                <Tab.List className='tabs'>
+                  {challenge.testCases.map((_, i) => (
+                    <Tab as={Fragment} key={i}>
+                      {({ selected }) => (
+                        <div
+                          className={cn(
+                            'tab tab-bordered focus:outline-none focus:ring-0',
+                            selected && 'tab-active'
+                          )}
+                        >
+                          Case {i + 1}
+                        </div>
+                      )}
+                    </Tab>
+                  ))}
+                </Tab.List>
+                <Tab.Panels>
+                  {challenge.testCases.map((testCase, i) => (
+                    <Tab.Panel key={i}>
+                      <div className='flex gap-2 mt-3'>
+                        <span className='font-semibold'>Input :</span>
+                        <span>"{testCase}"</span>
+                      </div>
+                      <div className='py-2 flex gap-2'>
+                        <span className='font-semibold'>Expected Output :</span>
+                        <pre>{challenge.expectedResults[i].toString()}</pre>
+                      </div>
+                      <div className='py-2 flex gap-2'>
+                        <span className='font-semibold'>Result :</span>
+                        {output[i]?.toString() && (
+                          <pre>{output[i].toString()}</pre>
+                        )}
+                      </div>
+                    </Tab.Panel>
+                  ))}
+                </Tab.Panels>
+              </Tab.Group>
+            </div>
           </div>
         </Split>
         <div className='absolute bottom-0 right-0 p-4'>
