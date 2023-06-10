@@ -30,7 +30,7 @@ export function Avatar() {
       </div>
       <ul
         tabIndex={0}
-        className='dropdown-content m-2 menu p-2 shadow bg-neutral-focus rounded-box w-52'
+        className='dropdown-content m-2 menu p-2 shadow bg-neutral-focus rounded-box w-52 z-50'
       >
         <li>
           <button onClick={handleLogout}>Logout</button>

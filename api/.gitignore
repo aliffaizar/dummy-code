@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# build files from web
+public 
+
 # Logs
 logs
 *.log

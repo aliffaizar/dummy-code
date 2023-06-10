@@ -86,6 +86,6 @@ export class AuthController {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     });
-    res.redirect(req.headers.host);
+    return res.redirect('/');
   }
 }

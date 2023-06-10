@@ -1,11 +1,14 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envValidationSchema } from './libs/env-validaton';
 import { UserModule } from './user/user.module';
+import { ChallengesModule } from './challenges/challenges.module';
 
 @Module({
   imports: [
@@ -26,8 +29,12 @@ import { UserModule } from './user/user.module';
         synchronize: true,
       }),
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     AuthModule,
     UserModule,
+    ChallengesModule,
   ],
   providers: [AppService],
 })

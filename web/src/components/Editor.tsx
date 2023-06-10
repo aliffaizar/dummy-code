@@ -61,7 +61,8 @@ export function Editor({ challenge }: { challenge: Challenge }) {
                         <div
                           className={cn(
                             'tab tab-bordered focus:outline-none focus:ring-0',
-                            selected && 'tab-active'
+                            selected && 'tab-active',
+                            result[i] && 'text-success'
                           )}
                         >
                           Case {i + 1}
