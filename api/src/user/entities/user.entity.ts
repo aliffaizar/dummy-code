@@ -16,4 +16,12 @@ export class User {
 
   @Column({ default: false })
   verified: boolean;
+
+  @Column({
+    nullable: false,
+    default: 'user',
+    type: 'enum',
+    enum: ['user', 'admin'],
+  })
+  role: 'user' | 'admin';
 }
