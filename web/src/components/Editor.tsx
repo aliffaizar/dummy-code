@@ -40,7 +40,7 @@ export function Editor({ challenge }: { challenge: Challenge }) {
     setResult(res?.result)
     setOutput(res.output)
 
-    if (res.result.includes(false)) {
+    if (res.result.includes(false) || res.result.length === 0) {
       toast.error('Test failed')
       return
     }
@@ -88,17 +88,11 @@ export function Editor({ challenge }: { challenge: Challenge }) {
                   ))}
                 </Tab.List>
                 <Tab.Panels>
-                  {challenge.testCases.map((testCase, i) => (
+                  {challenge.testInput.map((testCase, i) => (
                     <Tab.Panel key={i}>
                       <div className='flex gap-2 mt-3'>
                         <span className='font-semibold'>Input :</span>
-                        <span>
-                          {typeof testCase === 'object'
-                            ? testCase.map((el: string) => `"${el}"`).join(', ')
-                            : typeof testCase === 'string'
-                            ? `"${testCase}"`
-                            : testCase.toString()}
-                        </span>
+                        <span>{testCase}</span>
                       </div>
                       <div className='py-2 flex gap-2'>
                         <span className='font-semibold'>Expected Output :</span>

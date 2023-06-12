@@ -37,6 +37,7 @@ const challanges: Challenge = {
   starterCode,
   instructions,
   testCases: ['racecar', 'abba', 'abc'],
+  testInput: [`"racecar"`, `"abba"`, `"abc"`],
   expectedResults: [true, true, false],
 }
 

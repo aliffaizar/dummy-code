@@ -36,6 +36,7 @@ const challanges: Challenge = {
     ['anagram', 'nagaram'],
     ['rat', 'car'],
   ],
+  testInput: [`"anagram", "nagaram"`, `"rat", "car"`],
   expectedResults: [true, false],
 }
 

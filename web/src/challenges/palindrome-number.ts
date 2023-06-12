@@ -36,6 +36,7 @@ const challanges: Challenge = {
   starterCode,
   instructions,
   testCases: [121, -122, 10, -101],
+  testInput: [121, -122, 10, -101],
   expectedResults: [true, false, false, true],
 }
 

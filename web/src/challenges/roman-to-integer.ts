@@ -57,6 +57,7 @@ const challanges: Challenge = {
   starterCode,
   instructions,
   testCases: ['III', 'IV', 'IX', 'LVIII', 'MCMXCIV'],
+  testInput: [`"III"`, `"IV"`, `"IX"`, `"LVIII"`, `"MCMXCIV"`],
   expectedResults: [3, 4, 9, 58, 1994],
 }
 

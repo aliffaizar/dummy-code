@@ -1,11 +1,11 @@
 import { Challenge } from '../types/challenges'
 
 const starterCode = `/**
-  * @param {number} num
+  * @param {number} number
   * @return {string[]}
   */
 
-function fizzBuzz(num) {
+function fizzBuzz(number) {
   // Write your code here
 
 }`
@@ -49,6 +49,7 @@ const challanges: Challenge = {
   starterCode,
   instructions,
   testCases: [3, 5, 15],
+  testInput: [3, 5, 15],
   expectedResults: [
     ['1', '2', 'Fizz'],
     ['1', '2', 'Fizz', '4', 'Buzz'],

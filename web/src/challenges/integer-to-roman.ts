@@ -49,6 +49,7 @@ const challanges: Challenge = {
   starterCode,
   instructions,
   testCases: [3, 4, 9, 58, 1994],
+  testInput: [3, 4, 9, 58, 1994],
   expectedResults: ['III', 'IV', 'IX', 'LVIII', 'MCMXCIV'],
 }
 

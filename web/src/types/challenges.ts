@@ -6,4 +6,5 @@ export interface Challenge {
   instructions: string
   testCases: any[]
   expectedResults: any[]
+  testInput: any[]
 }
