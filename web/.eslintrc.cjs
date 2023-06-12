@@ -13,5 +13,6 @@ module.exports = {
     'react-refresh/only-export-components': 'warn',
     'react-hooks/exhaustive-deps': 'error',
     'no-console': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 }

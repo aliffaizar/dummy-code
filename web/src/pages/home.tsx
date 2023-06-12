@@ -30,7 +30,6 @@ export default function Home() {
                 >
                   {challenge.difficulty}
                 </span>
-                <span>{challenge.category}</span>
               </p>
             </div>
             <button className='btn btn-primary px-8 '>Start</button>

@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export type Role = 'admin' | 'user'
+
 export type User = {
   id: number
   name: string
   email: string
+  role: Role
 }
 export type Auth = {
   user: User | null
   authenicated: boolean
 }
 
-const initialState = {
+const initialState: Auth = {
   user: null,
   authenicated: false,
 }

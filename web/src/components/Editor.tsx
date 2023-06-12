@@ -1,30 +1,38 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { githubDark } from '@uiw/codemirror-theme-github'
 import { javascript } from '@codemirror/lang-javascript'
-import { Fragment, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import Split from 'react-split'
 import { toast } from 'react-toastify'
 import { Tab } from '@headlessui/react'
 
-import { Challenge } from '../challenges'
+import { Challenge } from '../types/challenges'
 import { cn } from '../lib/utils'
+import { validator } from '../lib/validator'
 
 export function Editor({ challenge }: { challenge: Challenge }) {
   const [code, setCode] = useState(challenge.starterCode)
   const [result, setResult] = useState<boolean[]>([])
-  const [output, setOutput] = useState<boolean[]>([])
+  const [output, setOutput] = useState<any[]>([])
+
+  const newOutput = useMemo(() => {
+    return output.map((el) => {
+      if (typeof el === 'object') return JSON.stringify(el)
+      if (typeof el === 'boolean') return el.toString()
+      return el
+    })
+  }, [output])
 
   const handleTest = () => {
-    const { res, output } = challenge.validator(
+    const res = validator(
       eval(`(${code.replace(/;/g, '')})`),
       challenge.testCases,
       challenge.expectedResults
     )
+    setResult(res?.result)
+    setOutput(res.output)
 
-    setResult(res)
-    setOutput(output)
-
-    if (res.includes(false)) {
+    if (res.result.includes(false)) {
       toast.error('Test failed')
       return
     }
@@ -84,9 +92,7 @@ export function Editor({ challenge }: { challenge: Challenge }) {
                       </div>
                       <div className='py-2 flex gap-2'>
                         <span className='font-semibold'>Result :</span>
-                        {output[i]?.toString() && (
-                          <pre>{output[i].toString()}</pre>
-                        )}
+                        {newOutput && <pre>{newOutput[i]}</pre>}
                       </div>
                     </Tab.Panel>
                   ))}

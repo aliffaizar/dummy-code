@@ -29,6 +29,9 @@ export function Navbar() {
               register
             </Link>
           )}
+          {auth.authenicated && auth.user?.role === 'admin' && (
+            <Link to='/admin'>Admin</Link>
+          )}
           {auth.authenicated && <Avatar />}
         </div>
       </div>

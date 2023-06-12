@@ -1,34 +1,42 @@
-const starterCode = `// Write a function that returns true if a string is a palindrome
-function palindrome(str) {
+import { Challenge } from '../types/challenges'
+
+const starterCode = `/**
+  * @param {string} str
+  * @return {boolean}
+  */
+
+function isPalindrome(str) {
   // Write your code here
 };`
 
-const testCases = ['racecar', 'cat', 'mom']
+const instructions = `Given a string \`str\`, return \`true\` if \`str\` is a palindrome, otherwise return \`false\`. A \`str\` is a palindrome when it reads the same backward as forward.
 
-const expectedResults = [true, false, true]
+#### **Example 1**:
 
-function validator(
-  fn: any,
-  testCases: string[],
-  expectedResults: boolean[]
-): { res: boolean[]; output: boolean[] } {
-  try {
-    const res: boolean[] = []
-    const output: boolean[] = []
-    for (let i = 0; i < testCases.length; i++) {
-      const result = fn(testCases[i])
-      output.push(result)
-      res.push(result === expectedResults[i])
-    }
-    return { res, output }
-  } catch (error) {
-    return { res: [], output: [] }
-  }
-}
+\`\`\`
+Input : str = "racecar"
+Output : true
+\`\`\`
+#### **Example 2**:
+\`\`\`
+Input : str = "abba"
+Output : true
+\`\`\`
+#### ***Example 3***:
+\`\`\`
+Input: str = "abc"
+Output : false
+\`\`\`
+`
 
-export default {
+const challanges: Challenge = {
+  id: 'palindrome',
+  title: 'Palindrome',
+  difficulty: 'Easy',
   starterCode,
-  testCases,
-  expectedResults,
-  validator,
+  instructions,
+  testCases: ['racecar', 'abba', 'abc'],
+  expectedResults: [true, true, false],
 }
+
+export default challanges
