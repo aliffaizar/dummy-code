@@ -114,7 +114,9 @@ export function Editor({ challenge }: { challenge: Challenge }) {
             <button onClick={handleTest} className='btn btn-sm btn-outline'>
               Run
             </button>
-            <button className='btn btn-sm btn-primary'>Submit</button>
+            <button disabled className='btn btn-sm btn-primary'>
+              Submit
+            </button>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { createServer } from 'http';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -12,6 +13,16 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(3000);
+  await app.init();
+  const server = createServer((req, res) =>
+    app.getHttpServer().emit('request', req, res),
+  );
+  if (process.env.NODE_ENV === 'development') {
+    server.listen(3000, () => {
+      console.log(`Server is listening on port ${3000}`);
+    });
+  } else {
+    server.listen();
+  }
 }
 bootstrap();

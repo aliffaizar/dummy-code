@@ -133,7 +133,7 @@ export default function Register() {
           <div className='mt-6 flex flex-wrap justify-center gap-3'>
             <div className='w-full'>
               <a
-                href='http://localhost:3000/api/auth/google'
+                href='/api/auth/google'
                 target='_bank'
                 className='inline-flex w-full justify-center rounded-md border items-center border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50'
               >

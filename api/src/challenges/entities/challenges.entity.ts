@@ -11,7 +11,11 @@ export class Challenge {
   @Column({ nullable: false, length: 100 })
   slug: string;
 
-  @Column({ nullable: false, length: 10, enum: ['easy', 'medium', 'hard'] })
+  @Column({
+    nullable: false,
+    type: 'enum',
+    enum: ['easy', 'medium', 'hard'],
+  })
   difficulty: 'easy' | 'medium' | 'hard';
 
   @Column({ type: 'text', nullable: false })
