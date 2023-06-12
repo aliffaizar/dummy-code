@@ -7,7 +7,8 @@ const starterCode = `/**
 
 function isPalindrome(str) {
   // Write your code here
-};`
+  
+}`
 
 const instructions = `Given a string \`str\`, return \`true\` if \`str\` is a palindrome, otherwise return \`false\`. A \`str\` is a palindrome when it reads the same backward as forward.
 

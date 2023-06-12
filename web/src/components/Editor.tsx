@@ -23,9 +23,17 @@ export function Editor({ challenge }: { challenge: Challenge }) {
     })
   }, [output])
 
+  const expectedResults = useMemo(() => {
+    return challenge.expectedResults.map((el) => {
+      if (typeof el === 'object') return JSON.stringify(el)
+      if (typeof el === 'boolean') return el.toString()
+      return el
+    })
+  }, [challenge.expectedResults])
+
   const handleTest = () => {
     const res = validator(
-      eval(`(${code.replace(/;/g, '')})`),
+      eval(`(${code})`),
       challenge.testCases,
       challenge.expectedResults
     )
@@ -41,7 +49,7 @@ export function Editor({ challenge }: { challenge: Challenge }) {
 
   return (
     <>
-      <div className='overflow-x-hidden relative'>
+      <div className='overflow-x-hidden w-full relative'>
         <Split
           className='h-[calc(100vh-64px)]'
           direction='vertical'
@@ -84,11 +92,17 @@ export function Editor({ challenge }: { challenge: Challenge }) {
                     <Tab.Panel key={i}>
                       <div className='flex gap-2 mt-3'>
                         <span className='font-semibold'>Input :</span>
-                        <span>"{testCase}"</span>
+                        <span>
+                          {typeof testCase === 'object'
+                            ? testCase.map((el: string) => `"${el}"`).join(', ')
+                            : typeof testCase === 'string'
+                            ? `"${testCase}"`
+                            : testCase.toString()}
+                        </span>
                       </div>
                       <div className='py-2 flex gap-2'>
                         <span className='font-semibold'>Expected Output :</span>
-                        <pre>{challenge.expectedResults[i].toString()}</pre>
+                        <pre>{expectedResults[i]}</pre>
                       </div>
                       <div className='py-2 flex gap-2'>
                         <span className='font-semibold'>Result :</span>

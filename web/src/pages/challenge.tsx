@@ -17,7 +17,7 @@ export default function Challenge() {
       ) : (
         <div className='overflow-hidden w-full'>
           <Split className='split' minSize={0} gutterSize={8}>
-            <div className='w-full overflow-y-auto p-6'>
+            <div className='w-full h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto p-6'>
               <div>
                 <h3 className='capitalize text-2xl font-semibold'>
                   {challenge.title}
