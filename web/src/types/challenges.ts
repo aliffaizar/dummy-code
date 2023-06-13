@@ -7,4 +7,9 @@ export interface Challenge {
   testCases: any[]
   expectedResults: any[]
   testInput: any[]
+  validator: (
+    fn: any,
+    testCases: any[],
+    expectedResults: any[]
+  ) => { result: any[]; output: any[] }
 }

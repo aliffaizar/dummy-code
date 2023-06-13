@@ -8,7 +8,6 @@ import { Tab } from '@headlessui/react'
 
 import { Challenge } from '../types/challenges'
 import { cn } from '../lib/utils'
-import { validator } from '../lib/validator'
 
 export function Editor({ challenge }: { challenge: Challenge }) {
   const [code, setCode] = useState(challenge.starterCode)
@@ -32,7 +31,7 @@ export function Editor({ challenge }: { challenge: Challenge }) {
   }, [challenge.expectedResults])
 
   const handleTest = () => {
-    const res = validator(
+    const res = challenge.validator(
       eval(`(${code})`),
       challenge.testCases,
       challenge.expectedResults

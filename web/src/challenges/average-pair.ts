@@ -1,4 +1,5 @@
 import { Challenge } from '../types/challenges'
+import { validator } from '../lib/validator-multi-params'
 
 const starterCode = `/**
   * @param {number[], number} numbers, average
@@ -42,6 +43,7 @@ const challanges: Challenge = {
   difficulty: 'Easy',
   starterCode,
   instructions,
+  validator,
   testCases: [
     [[1, 2, 3], 2.5],
     [[1, 3, 3, 5, 6, 7, 10, 12, 19], 8],

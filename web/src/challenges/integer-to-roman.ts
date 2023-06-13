@@ -1,4 +1,5 @@
 import { Challenge } from '../types/challenges'
+import { validator } from '../lib/validator'
 
 const starterCode = `/**
   * @param {number} num
@@ -48,6 +49,7 @@ const challanges: Challenge = {
   difficulty: 'Medium',
   starterCode,
   instructions,
+  validator,
   testCases: [3, 4, 9, 58, 1994],
   testInput: [3, 4, 9, 58, 1994],
   expectedResults: ['III', 'IV', 'IX', 'LVIII', 'MCMXCIV'],
