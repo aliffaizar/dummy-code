@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { envValidationSchema } from './libs/env-validaton';
 import { UserModule } from './user/user.module';
 import { ChallengesModule } from './challenges/challenges.module';
+import { SubmissionsModule } from './submissions/submissions.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ChallengesModule } from './challenges/challenges.module';
     AuthModule,
     UserModule,
     ChallengesModule,
+    SubmissionsModule,
   ],
   providers: [AppService],
 })

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Submission } from 'src/submissions/entities/submission.entity';
 
 @Entity()
 export class User {
@@ -24,4 +26,7 @@ export class User {
     enum: ['user', 'admin'],
   })
   role: 'user' | 'admin';
+
+  @OneToMany(() => Submission, (submission) => submission.user)
+  submissions: Submission[];
 }
