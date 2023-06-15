@@ -6,6 +6,7 @@ import integerToRoman from './integer-to-roman'
 import validAnagram from './valid-anagram'
 import duplicateEntry from './duplicate-entry'
 import averagePair from './average-pair'
+import maxSubarray from './max-subarray'
 
 import { Challenge } from '../types/challenges'
 
@@ -18,6 +19,7 @@ const challanges: Challenge[] = [
   integerToRoman,
   romanToInteger,
   validAnagram,
+  maxSubarray,
 ]
 
 export default challanges
