@@ -27,7 +27,7 @@ export class Submission {
   languageId: number;
 
   @ManyToOne(() => User, (user) => user.submissions)
-  user: string;
+  user: User;
 
   @ManyToOne(() => Challenge, (challenge) => challenge.submissions)
   challenge: string;

@@ -1,11 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSubmissionDto } from './dto/create-submission.dto';
-import { UpdateSubmissionDto } from './dto/update-submission.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { CreateSubmissionDto, UpdateSubmissionDto } from './dto';
+import { Submission } from './entities/submission.entity';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class SubmissionsService {
-  create(createSubmissionDto: CreateSubmissionDto) {
-    return 'This action adds a new submission';
+  constructor(
+    @InjectRepository(Submission)
+    private submissionsRepository: Repository<Submission>,
+    private usersService: UserService,
+  ) {}
+
+  async create(createSubmissionDto: CreateSubmissionDto) {
+    const user = await this.usersService.findById(createSubmissionDto.userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return this.submissionsRepository.save({
+      ...createSubmissionDto,
+      user,
+    });
   }
 
   findAll() {
