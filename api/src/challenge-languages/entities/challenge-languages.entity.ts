@@ -10,8 +10,11 @@ import {
 
 @Entity()
 export class ChallengeLanguage {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
+
+  @Column({ nullable: false, type: 'varchar', length: 32 })
+  language: string;
 
   @Column({ nullable: false, type: 'varchar', length: 255 })
   testCases: string;

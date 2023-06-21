@@ -16,30 +16,31 @@ export class ChallengesService {
   }
 
   async createChallenge(challenge: any) {
-    return await this.challengeRepository.save(challenge);
+    const newChallenge = this.challengeRepository.create(challenge);
+    return await this.challengeRepository.save(newChallenge);
   }
 
-  async getChallenge(slug: string) {
+  async getChallenge(id: number) {
     const challenge = await this.challengeRepository.findOne({
-      where: { slug },
+      where: { id },
     });
     if (!challenge) throw new NotFoundException('Challenge not found');
     return challenge;
   }
 
-  async updateChallenge(slug: string, challenge: any) {
-    const challengeToUpdate = await this.getChallenge(slug);
+  async updateChallenge(id: number, challenge: any) {
+    const challengeToUpdate = await this.getChallenge(id);
     return await this.challengeRepository.save({
       ...challengeToUpdate,
       ...challenge,
     });
   }
 
-  async deleteChallenge(slug: string) {
-    const challengeToDelete = await this.getChallenge(slug);
+  async deleteChallenge(id: number) {
+    const challengeToDelete = await this.getChallenge(id);
     return await this.challengeRepository.remove(challengeToDelete);
   }
-  async findChallengeById(id: string) {
+  async findChallengeById(id: number) {
     return await this.challengeRepository.findOneByOrFail({ id });
   }
 }

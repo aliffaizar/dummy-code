@@ -3,13 +3,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envValidationSchema } from './libs/env-validaton';
 import { UserModule } from './user/user.module';
 import { ChallengesModule } from './challenges/challenges.module';
 import { SubmissionsModule } from './submissions/submissions.module';
+import { ChallengeLanguagesModule } from './challenge-languages/challenge-languages.module';
 
 @Module({
   imports: [
@@ -36,8 +36,8 @@ import { SubmissionsModule } from './submissions/submissions.module';
     AuthModule,
     UserModule,
     ChallengesModule,
+    ChallengeLanguagesModule,
     SubmissionsModule,
   ],
-  providers: [AppService],
 })
 export class AppModule {}

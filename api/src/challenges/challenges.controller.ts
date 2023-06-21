@@ -25,21 +25,21 @@ export class ChallengesController {
     return this.challengesService.createChallenge(challenge);
   }
 
-  @Get(':slug')
-  challenge(@Param() slug: string) {
-    return this.challengesService.getChallenge(slug);
+  @Get(':id')
+  challenge(@Param('id') id: number) {
+    return this.challengesService.getChallenge(id);
   }
 
-  @Patch(':slug')
+  @Patch(':id')
   updateChallenge(
-    @Param() slug: string,
+    @Param('id') id: number,
     @Body() challenge: UpdateChallengeDto,
   ) {
-    return this.challengesService.updateChallenge(slug, challenge);
+    return this.challengesService.updateChallenge(id, challenge);
   }
 
-  @Delete(':slug')
-  deleteChallenge(@Param() slug: string) {
-    return this.challengesService.deleteChallenge(slug);
+  @Delete(':id')
+  deleteChallenge(@Param('id') id: number) {
+    return this.challengesService.deleteChallenge(id);
   }
 }
