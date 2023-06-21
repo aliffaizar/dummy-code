@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Challenge } from 'src/challenges/entities/challenges.entity';
 import { User } from 'src/user/entities/user.entity';
+import { ChallengeLanguage } from 'src/challenge-languages/entities/challenge-languages.entity';
 
 @Entity()
 export class Submission {
@@ -31,4 +32,10 @@ export class Submission {
 
   @ManyToOne(() => Challenge, (challenge) => challenge.submissions)
   challenge: string;
+
+  @ManyToOne(
+    () => ChallengeLanguage,
+    (challengeLanguage) => challengeLanguage.submissions,
+  )
+  challengeLanguage: ChallengeLanguage;
 }

@@ -27,6 +27,10 @@ export class CreateSubmissionDto {
   languageId: number;
 
   @IsString()
+  @IsNotEmpty()
+  challengeId: string;
+
+  @IsString()
   @IsOptional()
   userId: string;
 }

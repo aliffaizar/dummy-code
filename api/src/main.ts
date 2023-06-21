@@ -13,15 +13,15 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.init();
-  const server = createServer((req, res) =>
-    app.getHttpServer().emit('request', req, res),
-  );
   if (process.env.NODE_ENV === 'development') {
-    server.listen(3000, () => {
+    app.listen(3000, () => {
       console.log(`Server is listening on port ${3000}`);
     });
   } else {
+    await app.init();
+    const server = createServer((req, res) =>
+      app.getHttpServer().emit('request', req, res),
+    );
     server.listen();
   }
 }

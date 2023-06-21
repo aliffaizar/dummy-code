@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Submission } from 'src/submissions/entities/submission.entity';
+import { ChallengeLanguage } from 'src/challenge-languages/entities/challenge-languages.entity';
 
 @Entity()
 export class Challenge {
@@ -37,4 +38,10 @@ export class Challenge {
 
   @OneToMany(() => Submission, (submission) => submission.challenge)
   submissions: Submission[];
+
+  @OneToMany(
+    () => ChallengeLanguage,
+    (challengeLanguage) => challengeLanguage.challenge,
+  )
+  challengeLanguages: ChallengeLanguage[];
 }

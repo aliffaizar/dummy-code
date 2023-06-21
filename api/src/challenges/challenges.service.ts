@@ -39,4 +39,7 @@ export class ChallengesService {
     const challengeToDelete = await this.getChallenge(slug);
     return await this.challengeRepository.remove(challengeToDelete);
   }
+  async findChallengeById(id: string) {
+    return await this.challengeRepository.findOneByOrFail({ id });
+  }
 }

@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateSubmissionDto, UpdateSubmissionDto } from './dto';
 import { Submission } from './entities/submission.entity';
 import { UserService } from 'src/user/user.service';
+import { ChallengesService } from 'src/challenges/challenges.service';
 
 @Injectable()
 export class SubmissionsService {
@@ -12,6 +13,7 @@ export class SubmissionsService {
     @InjectRepository(Submission)
     private submissionsRepository: Repository<Submission>,
     private usersService: UserService,
+    private challengesService: ChallengesService,
   ) {}
 
   async create(createSubmissionDto: CreateSubmissionDto) {
@@ -19,8 +21,16 @@ export class SubmissionsService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    const challengeId = createSubmissionDto.challengeId;
+    const challenge = await this.challengesService.findChallengeById(
+      challengeId,
+    );
+    if (!challenge) {
+      throw new NotFoundException('Challenge not found');
+    }
     return this.submissionsRepository.save({
       ...createSubmissionDto,
+      challengeId: challenge.id,
       user,
     });
   }
