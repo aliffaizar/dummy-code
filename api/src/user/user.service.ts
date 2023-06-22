@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { User } from './entities/user.entity'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class UserService {
@@ -10,6 +10,6 @@ export class UserService {
   ) {}
 
   async findById(id: string): Promise<User> {
-    return this.userRepository.findOneByOrFail({ id });
+    return this.userRepository.findOneByOrFail({ id })
   }
 }

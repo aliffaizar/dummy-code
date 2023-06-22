@@ -1,21 +1,21 @@
-import { IsString } from 'class-validator';
+import { IsString } from 'class-validator'
 
 export class CreateChallengeLanguageDto {
   @IsString()
-  language: string;
+  language: string
 
   @IsString()
-  testCases: string;
+  testCases: string
 
   @IsString()
-  expectedResults: string;
+  expectedResults: string
 
   @IsString()
-  starterCode: string;
+  starterCode: string
 
   @IsString()
-  validator: string;
+  validator: string
 
   @IsString()
-  challengeId: number;
+  challengeId: number
 }

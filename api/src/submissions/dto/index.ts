@@ -1,38 +1,38 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateSubmissionDto {
   @IsString()
   @IsOptional()
-  stdout: string;
+  stdout: string
 
   @IsString()
   @IsOptional()
-  stderr: string;
+  stderr: string
 
   @IsString()
   @IsNotEmpty()
-  status: string;
+  status: string
 
   @IsNumber()
   @IsNotEmpty()
-  time: number;
+  time: number
 
   @IsString()
   @IsNotEmpty()
-  token: string;
+  token: string
 
   @IsNumber()
   @IsNotEmpty()
-  languageId: number;
+  languageId: number
 
   @IsNumber()
   @IsNotEmpty()
-  challengeId: number;
+  challengeId: number
 
   @IsString()
   @IsOptional()
-  userId: string;
+  userId: string
 }
 
 export class UpdateSubmissionDto extends PartialType(CreateSubmissionDto) {}

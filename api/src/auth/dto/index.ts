@@ -1,43 +1,43 @@
-import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator'
 
 export class RegisterDto {
   @IsNotEmpty()
   @IsString()
-  name: string;
+  name: string
 
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password: string
 }
 
 export class LoginDto {
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password: string
 }
 
 export class GoogleDto {
   @IsNotEmpty()
   @IsString()
-  name: string;
+  name: string
 
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password: string
 
   @IsNotEmpty()
   @IsBoolean()
-  verified: boolean;
+  verified: boolean
 }

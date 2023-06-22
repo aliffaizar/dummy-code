@@ -6,10 +6,10 @@ import {
   Param,
   Patch,
   Post,
-} from '@nestjs/common';
+} from '@nestjs/common'
 
-import { ChallengesService } from './challenges.service';
-import { CreateChallengeDto, UpdateChallengeDto } from './dto';
+import { ChallengesService } from './challenges.service'
+import { CreateChallengeDto, UpdateChallengeDto } from './dto'
 
 @Controller('challenges')
 export class ChallengesController {
@@ -17,17 +17,17 @@ export class ChallengesController {
 
   @Get()
   challenges() {
-    return this.challengesService.getChallenges();
+    return this.challengesService.getChallenges()
   }
 
   @Post()
   createChallenge(@Body() challenge: CreateChallengeDto) {
-    return this.challengesService.createChallenge(challenge);
+    return this.challengesService.createChallenge(challenge)
   }
 
   @Get(':id')
   challenge(@Param('id') id: number) {
-    return this.challengesService.getChallenge(id);
+    return this.challengesService.getChallenge(id)
   }
 
   @Patch(':id')
@@ -35,11 +35,11 @@ export class ChallengesController {
     @Param('id') id: number,
     @Body() challenge: UpdateChallengeDto,
   ) {
-    return this.challengesService.updateChallenge(id, challenge);
+    return this.challengesService.updateChallenge(id, challenge)
   }
 
   @Delete(':id')
   deleteChallenge(@Param('id') id: number) {
-    return this.challengesService.deleteChallenge(id);
+    return this.challengesService.deleteChallenge(id)
   }
 }

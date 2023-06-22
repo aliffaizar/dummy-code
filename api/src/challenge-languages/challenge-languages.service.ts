@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ChallengeLanguage } from './entities/challenge-languages.entity';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { ChallengeLanguage } from './entities/challenge-languages.entity'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class ChallengeLanguagesService {
@@ -11,6 +11,6 @@ export class ChallengeLanguagesService {
   ) {}
 
   async getChallengeLanguages() {
-    return await this.challengeLanguage.find();
+    return await this.challengeLanguage.find()
   }
 }

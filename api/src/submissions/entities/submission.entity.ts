@@ -1,41 +1,41 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
-import { Challenge } from 'src/challenges/entities/challenges.entity';
-import { User } from 'src/user/entities/user.entity';
-import { ChallengeLanguage } from 'src/challenge-languages/entities/challenge-languages.entity';
+import { Challenge } from 'src/challenges/entities/challenges.entity'
+import { User } from 'src/user/entities/user.entity'
+import { ChallengeLanguage } from 'src/challenge-languages/entities/challenge-languages.entity'
 
 @Entity()
 export class Submission {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column({ nullable: true })
-  stdout: string;
+  stdout: string
 
   @Column({ nullable: true })
-  stderr: string;
+  stderr: string
 
   @Column({ type: 'text' })
-  status: string;
+  status: string
 
   @Column({ type: 'decimal' })
-  time: number;
+  time: number
 
   @Column({ type: 'varchar', length: 64 })
-  token: string;
+  token: string
 
   @Column({ type: 'int' })
-  languageId: number;
+  languageId: number
 
   @ManyToOne(() => User, (user) => user.submissions)
-  user: User;
+  user: User
 
   @ManyToOne(() => Challenge, (challenge) => challenge.submissions)
-  challenge: string;
+  challenge: string
 
   @ManyToOne(
     () => ChallengeLanguage,
     (challengeLanguage) => challengeLanguage.submissions,
   )
-  challengeLanguage: ChallengeLanguage;
+  challengeLanguage: ChallengeLanguage
 }

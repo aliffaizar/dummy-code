@@ -1,23 +1,23 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
-import { Submission } from 'src/submissions/entities/submission.entity';
+import { Submission } from 'src/submissions/entities/submission.entity'
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column({ length: 100 })
-  name: string;
+  name: string
 
   @Column({ unique: true, length: 50 })
-  email: string;
+  email: string
 
   @Column({ length: 100 })
-  password: string;
+  password: string
 
   @Column({ default: false })
-  verified: boolean;
+  verified: boolean
 
   @Column({
     nullable: false,
@@ -25,8 +25,8 @@ export class User {
     type: 'enum',
     enum: ['user', 'admin'],
   })
-  role: 'user' | 'admin';
+  role: 'user' | 'admin'
 
   @OneToMany(() => Submission, (submission) => submission.user)
-  submissions: Submission[];
+  submissions: Submission[]
 }

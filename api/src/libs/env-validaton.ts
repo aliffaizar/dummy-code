@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import * as Joi from 'joi'
 
 export const envValidationSchema = Joi.object({
   MYSQL_HOST: Joi.string().required(),
@@ -15,4 +15,4 @@ export const envValidationSchema = Joi.object({
   GOOGLE_CLIENT_ID: Joi.string().required(),
   GOOGLE_CLIENT_SECRET: Joi.string().required(),
   GOOGLE_CALLBACK_URL: Joi.string().required(),
-});
+})

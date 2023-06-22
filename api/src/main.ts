@@ -1,28 +1,28 @@
-import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
+import { NestFactory } from '@nestjs/core'
+import { ValidationPipe } from '@nestjs/common'
+import * as cookieParser from 'cookie-parser'
 
-import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { createServer } from 'http';
+import { AppModule } from './app.module'
+import { NestExpressApplication } from '@nestjs/platform-express'
+import { createServer } from 'http'
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
-  app.use(cookieParser(process.env.COOKIE_SECRET));
-  app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser(process.env.COOKIE_SECRET))
+  app.setGlobalPrefix('api')
+  app.useGlobalPipes(new ValidationPipe())
 
   if (process.env.NODE_ENV === 'development') {
     app.listen(3000, () => {
-      console.log(`Server is listening on port ${3000}`);
-    });
+      console.log(`Server is listening on port ${3000}`)
+    })
   } else {
-    await app.init();
+    await app.init()
     const server = createServer((req, res) =>
       app.getHttpServer().emit('request', req, res),
-    );
-    server.listen();
+    )
+    server.listen()
   }
 }
-bootstrap();
+bootstrap()
