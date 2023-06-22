@@ -1,4 +1,5 @@
-import { IsString } from 'class-validator'
+import { PartialType } from '@nestjs/mapped-types'
+import { IsNumber, IsString } from 'class-validator'
 
 export class CreateChallengeLanguageDto {
   @IsString()
@@ -16,6 +17,10 @@ export class CreateChallengeLanguageDto {
   @IsString()
   validator: string
 
-  @IsString()
+  @IsNumber()
   challengeId: number
 }
+
+export class UpdateChallengeLanguageDto extends PartialType(
+  CreateChallengeLanguageDto,
+) {}

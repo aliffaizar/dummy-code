@@ -6,8 +6,8 @@ import { ChallengeLanguage } from 'src/challenge-languages/entities/challenge-la
 
 @Entity()
 export class Submission {
-  @PrimaryGeneratedColumn('uuid')
-  id: string
+  @PrimaryGeneratedColumn()
+  id: number
 
   @Column({ nullable: true })
   stdout: string

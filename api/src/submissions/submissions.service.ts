@@ -17,6 +17,8 @@ export class SubmissionsService {
   ) {}
 
   async create(createSubmissionDto: CreateSubmissionDto) {
+    // todo send submission to judge service and get result
+    // todo save submission to database
     const user = await this.usersService.findById(createSubmissionDto.userId)
     if (!user) {
       throw new NotFoundException('User not found')
